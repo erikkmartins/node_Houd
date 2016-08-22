@@ -3,7 +3,6 @@
 var express = require('express'), 
     bodyParser = require('body-parser'),
     app = express(),
-    validator = require('validator'),
     router = require('./router'),
     http = require('http');
 

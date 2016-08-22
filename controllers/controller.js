@@ -9,14 +9,11 @@ exports.login = function(req, res, next) {
 
     //validação simples
   
-    var email = validator.trim(validator.escape(req.params.email));
-    var senha = validator.trim(validator.escape(req.params.senha));
+    var email = req.body.email;
+    var senha = req.body.senha;
      
-    //cria um objeto
-    var usuario = {
-        EmailUsuario: req.body.email,
-        SenhaUsuario: req.body.senha
-    };
+    console.log(email, senha);
+
 
     req.getConnection(function(err, conn) {
 
@@ -45,6 +42,68 @@ exports.login = function(req, res, next) {
         });
     });
 }
+
+
+//Register to DB
+    exports.register = function(req, res, next) {
+
+    //validação simples
+    var nome = req.body.nome;
+    var email = req.body.email;
+    var senha = req.body.senha;
+    var sexo = req.body.sexo;
+    var datanascimento = req.body.datanascimento;
+    var idade = req.body.idade;
+
+
+
+    //cria um objeto
+    var usuario = {
+        NomeUsuario: nome,
+        EmailUsuario: email,
+        IdadeUsuario: idade,
+        SexoUsuario: sexo,
+        DatadeNascimentoUsuario: datanascimento,
+        SenhaUsuario: senha
+    };
+
+
+
+req.getConnection(function(err, conn) {
+
+    if (err) return next("Cannot Connect");
+
+         var query = conn.query('SELECT * FROM Usuario u WHERE  u.EmailUsuario = ? and u.SenhaUsuario = ?' , [email , senha] , function(err, rows) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+
+            if (rows.length < 1) {
+                console.log("Usuário não encontrado!");
+
+        var query = conn.query("INSERT INTO Usuario set ? ", usuario, function(err, usu) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+            return res.json(true);
+            res.sendStatus(200)
+        });           
+}
+
+            if (rows.length >= 1) {
+                console.log("Usuário encontrado!");
+                return res.json(false);
+                res.sendStatus(409);
+            } 
+        });
+    });
+
+}
+
 
 //SELECT ALL
 exports.usuario = function(req, res, next) {
@@ -128,14 +187,14 @@ exports.usuario_del = function(req, res, next) {
     exports.checkin = function(req, res, next) {
 
     //validação simples
-    var nome = validator.trim(validator.escape(req.params.nome));
-    var intolerancia = validator.trim(validator.escape(req.params.intolerancia));
-    var restaurante = validator.trim(validator.escape(req.params.restaurante));
-    var endereco = validator.trim(validator.escape(req.params.endereco));
-    var cep = validator.trim(validator.escape(req.params.cep));
-    var cidade = validator.trim(validator.escape(req.params.cidade));
-    var estado = validator.trim(validator.escape(req.params.estado));
-    var pais = validator.trim(validator.escape(req.params.pais));
+    var nome = req.params.nome;
+    var intolerancia = req.params.intolerancia;
+    var restaurante = req.params.restaurante;
+    var endereco = req.params.endereco;
+    var cep = req.params.cep;
+    var cidade = req.params.cidade;
+    var estado = req.params.estado;
+    var pais = req.params.pais;
 
 
 
@@ -223,8 +282,8 @@ exports.usuario_del = function(req, res, next) {
 //UPDATE 
 exports.update = function(req, res, next) {
 
-    var user_id = (req.params.id);
-    var name = validator.trim(validator.escape(req.params.name));
+    var user_id = req.params.id;
+    var name = req.params.name;
 
 
 
@@ -272,4 +331,31 @@ exports.update = function(req, res, next) {
         });
 
   });
+}
+
+//SELECT ALL
+exports.pesquisa = function(req, res, next) {
+    var p0 = req.body.p0;
+    var p1 = req.body.p1;
+    var p2 = req.body.p2;
+    var p3 = req.body.p3;
+    var p4 = req.body.p4;
+
+    console.log(p0, p1, p2, p3, p4);
+
+    req.getConnection(function(err, conn) {
+
+        if (err) return next("Impossível conectar");
+
+        var query = conn.query("CALL `BuscaRestaurante`(?, ?, ?, ?);", [p0, p1, p2, p3], function(err, rows) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+            return res.json(rows);
+            res.sendStatus(200);
+        });
+
+    });
 }

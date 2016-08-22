@@ -23,6 +23,12 @@ router.route('/update')
 .put(Controller.update);
 
 router.route('/login')
-.post(Controller.update);
+.post(Controller.login);
+
+router.route('/register')
+.put(Controller.register);
+
+router.route('/pesquisa')
+.post(Controller.pesquisa);
 
 module.exports = router; 
