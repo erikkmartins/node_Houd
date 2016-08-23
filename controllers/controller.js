@@ -335,19 +335,19 @@ exports.update = function(req, res, next) {
 
 //SELECT ALL
 exports.pesquisa = function(req, res, next) {
-    var p0 = req.body.p0;
-    var p1 = req.body.p1;
-    var p2 = req.body.p2;
-    var p3 = req.body.p3;
-    var p4 = req.body.p4;
+    var Restaurante = req.body.Restaurante;
+    var Logradouro = req.body.Logradouro;
+    var Cidade = req.body.Cidade;
+    var Estado = req.body.Estado;
+    var TipoRestricao = req.body.TipoRestricao;
 
-    console.log(p0, p1, p2, p3, p4);
+    console.log(Restaurante, Logradouro, Cidade, Estado, TipoRestricao);
 
     req.getConnection(function(err, conn) {
 
         if (err) return next("Impossível conectar");
 
-        var query = conn.query("CALL `BuscaRestaurante`(?, ?, ?, ?);", [p0, p1, p2, p3], function(err, rows) {
+        var query = conn.query("CALL `BuscaRestaurante`(?, ?, ?, ?);", [Restaurante, Logradouro, Cidade, Estado], function(err, rows) {
 
             if (err) {
                 console.log(err);
