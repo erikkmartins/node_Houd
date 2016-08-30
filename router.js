@@ -31,4 +31,10 @@ router.route('/register')
 router.route('/pesquisa')
 .post(Controller.pesquisa);
 
+router.route('/regproduto')
+.post(Controller.regproduto);
+
+router.route('/pesproduto')
+.get(Controller.pesproduto);
+
 module.exports = router; 

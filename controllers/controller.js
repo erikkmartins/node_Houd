@@ -3,6 +3,78 @@ exports.default = function(req, res, next) {
 
 }
 
+//pesquisa de produtos
+exports.pesproduto = function(req, res, next) {
+
+    req.getConnection(function(err, conn) {
+
+        if (err) return next("Impossível conectar");
+
+        var query = conn.query("SELECT * FROM Produto u ", function(err, rows) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+            return res.json(rows);
+            res.sendStatus(200);
+        });
+
+    });
+}
+
+//registro de produtos
+exports.regproduto = function(req, res, next) {
+    var nomeProd = req.body.NomeProduto;
+    var fabriProd   = req.body.FabricanteProduto;
+    var CodBarraProd = req.body.CodigoDeBarrasProduto;
+    var StatusProd = "1";
+
+   var produto = {
+        NomeProduto: nomeProd,
+        FabricanteProduto: fabriProd,
+        CodigoDeBarrasProduto: CodBarraProd,
+        StatusProduto: StatusProd
+        
+    };
+
+
+
+req.getConnection(function(err, conn) {
+
+    if (err) return next("Cannot Connect");
+
+         var query = conn.query('SELECT * FROM Produto u WHERE  u.CodigoDeBarrasProduto = ? and u.StatusProduto <> 0 ' , [CodBarraProd , StatusProd] , function(err, rows) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+
+            if (rows.length < 1) {
+                console.log("Produto não encontrado!");
+
+        var query = conn.query("INSERT INTO Produto set ? ", produto, function(err, usu) {
+
+            if (err) {
+                console.log(err);
+                return next("Erro na query");
+            }
+            return res.json(true);
+            res.sendStatus(200)
+        });           
+}
+
+            if (rows.length >= 1) {
+                console.log("Produto já cadastrado!");
+                return res.json(false);
+                res.sendStatus(409);
+            } 
+        });
+    });
+
+
+}
 
 //INSERT to DB login
 exports.login = function(req, res, next) {
@@ -12,7 +84,7 @@ exports.login = function(req, res, next) {
     var email = req.body.email;
     var senha = req.body.senha;
      
-    console.log(email, senha);
+   // console.log(email, senha);
 
 
     req.getConnection(function(err, conn) {
@@ -36,7 +108,7 @@ exports.login = function(req, res, next) {
 
             if (rows.length >= 1) {
                 console.log("Usuário encontrado!");
-                return res.json(true);
+                return res.json(rows);
                 res.sendStatus(200);
             } 
         });
@@ -347,7 +419,7 @@ exports.pesquisa = function(req, res, next) {
 
         if (err) return next("Impossível conectar");
 
-        var query = conn.query("CALL `BuscaRestaurante`(?, ?, ?, ?);", [Restaurante, Logradouro, Cidade, Estado], function(err, rows) {
+        var query = conn.query("CALL `BuscaRestaurante`(?, ?, ?, ?, ?);", [Restaurante, Logradouro, Cidade, Estado, TipoRestricao], function(err, rows) {
 
             if (err) {
                 console.log(err);
