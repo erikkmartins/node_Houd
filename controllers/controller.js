@@ -5,12 +5,14 @@ exports.default = function(req, res, next) {
 
 //pesquisa de produtos
 exports.pesproduto = function(req, res, next) {
+    var pesqProd = req.body.PesquisaProduto;
+
 
     req.getConnection(function(err, conn) {
 
         if (err) return next("Impossível conectar");
 
-        var query = conn.query("SELECT * FROM Produto u ", function(err, rows) {
+        var query = conn.query("SELECT * FROM Produto u WHERE upper(u.NomeProduto) like ? or upper(u.FabricanteProduto) like ?",[pesqProd, pesqProd] , function(err, rows) {
 
             if (err) {
                 console.log(err);

@@ -35,6 +35,6 @@ router.route('/regproduto')
 .post(Controller.regproduto);
 
 router.route('/pesproduto')
-.get(Controller.pesproduto);
+.post(Controller.pesproduto);
 
 module.exports = router; 
