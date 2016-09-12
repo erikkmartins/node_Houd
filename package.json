@@ -2,9 +2,9 @@
   "name": "node_Houd_ws",
   "description": "Houd Webservice",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "main": "app.js",
   "scripts": {
-    "start": "/opt/app-root/src/app.js"
+    "start": "app.js"
 }
 }
