@@ -34,7 +34,7 @@ app.use(
 app.use('/', router);
 
 //start Server
-var server = app.listen(7171, function() {
+var server = app.listen(8080, function() {
 
     console.log("Ouvindo na porta %s", server.address().port);
 
