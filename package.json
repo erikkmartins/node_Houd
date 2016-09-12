@@ -10,5 +10,8 @@
     "express-myconnection": "*",
     "validator": "^5.2.0",
     "mysql": "*"
-  }
+  },
+  "scripts": {
+    "start": "app.js"
+}
 }
