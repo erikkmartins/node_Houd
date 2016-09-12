@@ -1,10 +1,4 @@
-{
-  "name": "node_Houd_ws",
-  "description": "Houd Webservice",
-  "version": "1.0.0",
-  "private": false,
-  "main": "app.js",
-  "scripts": {
-    "start": "app.js"
-}
-}
+"scripts": {
+  "start": "app.js"
+},
+"main": "app.js"
