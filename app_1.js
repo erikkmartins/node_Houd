@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 
 
-/*Conex√£o MySQL*/
+/*Conex„o MySQL*/
 
 var connection = require('express-myconnection'),
     mysql = require('mysql');
