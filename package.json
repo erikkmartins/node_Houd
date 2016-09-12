@@ -12,6 +12,6 @@
     "mysql": "*"
   },
   "scripts": {
-    "start": "app.js"
+    "start": "/opt/app-root/src/app.js"
 }
 }
