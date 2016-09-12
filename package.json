@@ -4,7 +4,11 @@
   "description": "Houd Webservice",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.13.4"
+    "body-parser": "1.9.0",
+    "express": "4.9.5",
+    "express-myconnection": "*",
+    "validator": "^5.2.0",
+    "mysql": "*"
   },
   "engine": {
     "node": "*",
