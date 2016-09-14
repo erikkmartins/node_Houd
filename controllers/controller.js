@@ -187,8 +187,9 @@ exports.usuario = function(req, res, next) {
         if (err) return next("Impossível conectar");
 
         var query = conn.query('SELECT * FROM Usuario u '
-            + ' INNER JOIN Restaurante r on u.CodUsuario = r.CodUsuario  ' 
-            + 'INNER JOIN IntoleranciaAlimentar i on u.CodIntoleranciaAlimentar = i.CodIntoleranciaAlimentar  ', function(err, rows) {
+            + 'INNER JOIN Restaurante r on u.CodUsuario = r.CodUsuario ' 
+            + 'INNER JOIN IntoleranciaAlimentar i on u.CodUsuario = i.CodUsuario '
+            + 'INNER JOIN Endereco e on e.CodUsuario = u.CodUsuario', function(err, rows) {
 
             if (err) {
                 console.log(err);
