@@ -21,29 +21,29 @@ app.use(bodyParser.json());
 var connection = require('express-myconnection'),
     mysql = require('mysql');
 
-app.use(
-
-    connection(mysql, {
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        port: '8889',
-        database: 'houd'
-    }, 'request')
-
-);
-
 // app.use(
 
 //     connection(mysql, {
-//         host: '10.1.39.13',
-//         user: 'userKIW',
-//         password: 'dGBvVUKdQyNf7k7S',
-//         port: '3306',
+//         host: 'localhost',
+//         user: 'root',
+//         password: 'root',
+//         port: '8889',
 //         database: 'houd'
 //     }, 'request')
 
 // );
+
+app.use(
+
+    connection(mysql, {
+        host: '10.1.39.13',
+        user: 'userKIW',
+        password: 'dGBvVUKdQyNf7k7S',
+        port: '3306',
+        database: 'houd'
+    }, 'request')
+
+);
 
 
 app.use('/', router);
