@@ -7,34 +7,38 @@ var router = express.Router();
 router.route('/')
 .get(Controller.default);
 
-router.route('/usuario')
-.get(Controller.usuario);
 
-router.route('/usuario/:CodUsuario')
-.get(Controller.usuario_id);
-
-router.route('/usuario')
-.delete(Controller.usuario_del);
-
+//ok
 router.route('/checkin')
 .post(Controller.checkin);
 
-router.route('/update')
-.put(Controller.update);
 
+//ok
 router.route('/login')
 .post(Controller.login);
 
+//ok
 router.route('/register')
 .put(Controller.register);
 
+//ok
 router.route('/pesquisa')
 .post(Controller.pesquisa);
 
+//ok
 router.route('/regproduto')
 .post(Controller.regproduto);
 
+//ok
 router.route('/pesproduto')
 .post(Controller.pesproduto);
+
+//ok
+router.route('/pesprod2')
+.post(Controller.pesprod2);
+
+//ok
+router.route('/pesEspecialista')
+.post(Controller.pesEspecialista);
 
 module.exports = router; 

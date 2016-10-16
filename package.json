@@ -8,7 +8,8 @@
     "express": "4.9.5",
     "express-myconnection": "*",
     "validator": "^5.2.0",
-    "mysql": "*"
+    "mysql": "*",
+    "async": "*"
   },
   "engine": {
     "node": "*",

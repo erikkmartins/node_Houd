@@ -6,7 +6,7 @@ var express = require('express'),
     http = require('http');
     
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 7171,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 
@@ -48,14 +48,13 @@ app.use(
 
 app.use('/', router);
 
-
 // error handling
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.status(500).send('Something bad happened!');
+  res.status(500).send('Houve algum problema!');
 });
 
 app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
+console.log('Server disponível em: http://%s:%s', ip, port);
 
 module.exports = app ;
