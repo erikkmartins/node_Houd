@@ -36,9 +36,9 @@ var connection = require('express-myconnection'),
 app.use(
 
     connection(mysql, {
-        host: '10.1.104.3',
+        host: '10.1.33.11',
         user: 'houd',
-        password: 'DBjxwUvHyASsY6QH',
+        password: 'MekHgx6uxQxdu68A',
         port: '3306',
         database: 'houd'
     }, 'request')
